@@ -12,6 +12,9 @@ const mongoose = require('mongoose')
 const { logEvents } = require('./middleware/logger')
 const PORT = process.env.PORT || 5000
 
+// To suppress the warning that notify users the change that will b e introduced in Mongoose 7 to the default value of strictQuery which is set to false
+mongoose.set('strictQuery', true); 
+
 connectDB()
 
 app.use(logger)
@@ -26,6 +29,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 // Routes
 app.use('/', require('./routes/root'))
+app.use('/users', require('./routes/userRoutes'))
 
 // No route
 app.all('*', (req, res) =>{

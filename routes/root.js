@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const {getRoot} = require('../controller/rootController')
 
 
-router.get('^/$|/index(.html)?', getRoot)
+router.get('^/$|/index(.html)?',(req,res) =>{
+    res.sendFile(path.join(__dirname, '..', 'views', 'index.html'))
+})
 
 module.exports = router
